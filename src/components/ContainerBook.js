@@ -2,18 +2,85 @@ import React from "react";
 import CardBook from "./CardBook";
 import books from "../database/books.js";
 
-const ContainerBook = () => {
+const ContainerBook = (props) => {
+  const filter = props.filter;
+  const search = props.search;
+  const year = props.year;
   const allBooks = books.map((book, index) => {
-    return (
-      <CardBook
-        key={index}
-        title={book.title}
-        author={book.author}
-        publisher={book.publisher}
-        year={book.year}
-        random={Math.floor(Math.random() * 11)}
-      />
-    );
+    if (filter === "title") {
+      if (book.title.toLowerCase().includes(search.toLowerCase())) {
+        return (
+          <CardBook
+            key={index}
+            title={book.title}
+            author={book.author}
+            publisher={book.publisher}
+            year={book.year}
+            random={Math.floor(Math.random() * 11)}
+          />
+        );
+      }
+    } else if (filter === "author") {
+      if (book.author.toLowerCase().includes(search.toLowerCase())) {
+        return (
+          <CardBook
+            key={index}
+            title={book.title}
+            author={book.author}
+            publisher={book.publisher}
+            year={book.year}
+            random={Math.floor(Math.random() * 11)}
+          />
+        );
+      }
+    } else if (filter === "publish") {
+      if (book.publisher.toLowerCase().includes(search.toLowerCase())) {
+        return (
+          <CardBook
+            key={index}
+            title={book.title}
+            author={book.author}
+            publisher={book.publisher}
+            year={book.year}
+            random={Math.floor(Math.random() * 11)}
+          />
+        );
+      }
+    } else if (filter === "year") {
+      if (
+        book.year === year &&
+        book.title.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return (
+          <CardBook
+            key={index}
+            title={book.title}
+            author={book.author}
+            publisher={book.publisher}
+            year={book.year}
+            random={Math.floor(Math.random() * 11)}
+          />
+        );
+      }
+    } else {
+      if (
+        book.title.toLowerCase().includes(search.toLowerCase()) ||
+        book.publisher.toLowerCase().includes(search.toLowerCase()) ||
+        book.author.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return (
+          <CardBook
+            key={index}
+            title={book.title}
+            author={book.author}
+            publisher={book.publisher}
+            year={book.year}
+            random={Math.floor(Math.random() * 11)}
+          />
+        );
+      }
+    }
+    return <></>;
   });
   return (
     <>

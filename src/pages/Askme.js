@@ -1,27 +1,34 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import GuestCard from "../components/GuestCard";
 
+const initQuests = [
+  {
+    guestName: "React JS",
+    quest: "The first question...?",
+  },
+];
+
 const Askme = () => {
-  const [nama, setNama] = useState("");
-  const [question, setQuestion] = useState("");
-  const [quests, setQuests] = useState([
-    {
-      guestName: "React JS",
-      quest: "The first question...?",
-    },
-  ]);
+  const nama = useRef();
+  const quest = useRef();
+  const [quests, setQuests] = useState(initQuests);
 
   const handleAddQuest = (e) => {
     e.preventDefault();
-    setQuests((prevQuest) => [
-      ...prevQuest,
-      {
-        guestName: nama,
-        quest: question,
-      },
-    ]);
-    setNama("");
-    setQuestion("");
+    e.preventDefault();
+    if (nama.current.value === 0) {
+      return;
+    }
+
+    const newItem = {
+      guestName: nama.current.value,
+      quest: quest.current.value,
+    };
+
+    setQuests(quests.concat(newItem));
+    nama.current.value = "";
+    quest.current.value = "";
+    nama.current.focus();
   };
   const allQuest = quests.map((quest, indeks) => {
     return (
@@ -42,25 +49,23 @@ const Askme = () => {
           onSubmit={handleAddQuest}
           className={"w-full flex justify-between items-center mt-8"}>
           <input
+            ref={nama}
             className={
               "w-full p-2 border-t-2 border-l-2 border-b-2 border-slate-400 rounded-tl-lg rounded-bl-lg focus:ring-4 focus:ring-blue-300"
             }
             type="text"
             name="guest"
             placeholder="Guest's Name"
-            onChange={(e) => setNama(e.target.value)}
-            value={nama}
             required
           />
           <input
+            ref={quest}
             className={
               "w-full p-2 border-t-2 border-l-2 border-b-2 border-slate-400 focus:ring-4 focus:ring-blue-300"
             }
             type="text"
             name="guest"
             placeholder="Question.."
-            onChange={(e) => setQuestion(e.target.value)}
-            value={question}
             required
           />
           <button

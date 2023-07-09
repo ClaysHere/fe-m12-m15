@@ -11,9 +11,7 @@ function App() {
     <>
       <Router>
         <div className={"w-full px-72 pt-12"}>
-          <div className={"w-full"}>
-            <Navbar />
-          </div>
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/guestbook" element={<GuestBook />} />
