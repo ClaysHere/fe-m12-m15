@@ -48,7 +48,21 @@ const ContainerBook = (props) => {
       }
     } else if (filter === "year") {
       if (
-        book.year === year &&
+        book.year === parseInt(year) &&
+        book.title.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return (
+          <CardBook
+            key={index}
+            title={book.title}
+            author={book.author}
+            publisher={book.publisher}
+            year={book.year}
+            random={Math.floor(Math.random() * 11)}
+          />
+        );
+      } else if (
+        year === "" &&
         book.title.toLowerCase().includes(search.toLowerCase())
       ) {
         return (

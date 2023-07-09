@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import ContainerBook from "../components/ContainerBook";
 
 let initSearch = {
@@ -18,36 +18,37 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (search.current.value === "") {
-    //   return;
-    // }
 
     const newSearch = {
       search: search.current.value,
-      year: parseInt(tahun.current.value),
+      year: tahun.current.value,
     };
 
     setSearching(newSearch);
     setFormSubmitted(true);
-  };
 
-  useEffect(() => {
-    initSearch.search = search.current.value;
-  }, [searching]);
+    search.current.value = "";
+  };
 
   return (
     <>
-      <form className={"w-full"}>
-        <div className={"flex items-end"}>
+      <form onSubmit={handleSubmit} className={"w-full"}>
+        <div className={"flex mt-8"}>
           <input
-            onChange={handleSubmit}
             ref={search}
             type="text"
             placeholder="Search"
             className={
-              "w-full p-2 border-2 border-slate-400 rounded-lg focus:ring-4 focus:ring-blue-300 mt-8"
+              "w-full p-2 border-t-2 border-l-2 border-b-2 border-slate-400 rounded-tl-lg rounded-bl-lg focus:ring-4 focus:ring-blue-300"
             }
           />
+          <button
+            className={
+              "py-2 px-3 font-semibold hover:bg-green-800 bg-green-700 text-white border-t-2 border-r-2 border-b-2 border-green-700 rounded-tr-lg rounded-br-lg"
+            }
+            type="submit">
+            Search
+          </button>
         </div>
         <div className={"mt-4 flex gap-x-2 items-center"}>
           <div className={"flex gap-2"}>
