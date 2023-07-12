@@ -7,7 +7,10 @@ const Navbar = () => {
     <>
       <div>
         <Logo />
-        <ul className={"ml-80 flex items-center py-4 gap-x-4"}>
+        <ul
+          className={
+            "lg:ml-80 flex items-center py-4 gap-4 flex-wrap px-4 justify-center"
+          }>
           <li className={"cursor-pointer hover:scale-105"}>
             <NavLink
               to={"/"}
@@ -51,6 +54,15 @@ const Navbar = () => {
                 borderBottom: isActive ? "2px solid black" : "none",
               })}>
               Ask Me
+            </NavLink>
+          </li>
+          <li className={"cursor-pointer hover:scale-105"}>
+            <NavLink
+              to={"/account/signin"}
+              style={({ isActive }) => ({
+                borderBottom: isActive ? "2px solid black" : "none",
+              })}>
+              Account
             </NavLink>
           </li>
         </ul>
